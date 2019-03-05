@@ -1,11 +1,26 @@
 .card-column {
-    width: 40%;
     height: 100%;
     display: block;
-
     overflow: scroll;
     overflow-x: hidden;
 }
+
+.card-column {
+    height: 120%;
+    width: 70%;
+}
+
+@media (min-width: 1360px) {
+    .card-column {
+        min-width: 0;
+        height: 120%;
+        width: 40%;
+    }
+}
+
+
+
+
 .secondary-card {
     width: 99%;
     height: auto;
