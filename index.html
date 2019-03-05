@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>coletz.dev</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <!-- Load common before specific so override will work properly -->
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/main-card.css">
+    <link rel="stylesheet" type="text/css" href="css/secondary-card.css">
+
+    <script src="js/cutter.js"></script>
+    <script src="js/github-api.js"></script>
+
+    <script>
+        const github = new GithubApi();
+
+        function onInit(){
+            initCutter();
+            const cardColumn = document.getElementById("card-column");
+            console.log(cardColumn);
+
+            github.onRepoDownloaded = (repo) => {
+                const secondaryCard = document.createElement("div");
+                secondaryCard.id = "card-" + repo.repo_id;
+                secondaryCard.classList.add("base-card");
+                secondaryCard.classList.add("secondary-card");
+
+                const author = document.createElement("p");
+                const authorLink = document.createElement("a");
+                author.id = repo.owner.owner_id;
+                author.classList.add("secondary-card-author");
+                authorLink.href = repo.owner.html_url;
+                authorLink.target = "_blank";
+                authorLink.innerText = "@" + repo.owner.login;
+                author.appendChild(authorLink);
+                secondaryCard.appendChild(author);
+
+                const title = document.createElement("div");
+                const titleSpan = document.createElement("span");
+                titleSpan.innerText = repo.name;
+                title.classList.add("secondary-card-title");
+                title.appendChild(titleSpan);
+                secondaryCard.appendChild(title);
+
+                const desc = document.createElement("p");
+                desc.innerText = repo.description;
+                desc.classList.add("secondary-card-desc");
+                secondaryCard.appendChild(desc);
+
+                const lang = document.createElement("p");
+                lang.innerText = "{ "+repo.lang+" }";
+                lang.classList.add("secondary-card-lang");
+                secondaryCard.appendChild(lang);
+
+                secondaryCard.onclick = (event) => {
+                    const tagName = event.target.tagName.toLowerCase();
+                    if(tagName !== "a") {
+                        window.open(repo.html_url);
+                    }
+                };
+
+                cardColumn.appendChild(secondaryCard);
+            };
+            github.initGithub();
+        }
+    </script>
+</head>
+<body onload="onInit()" onresize="resizeCutter()">
+    <div id="main-card" class="base-card main-card">
+        <div id="main-card-cutter" class="main-card-left"></div>
+        <div class="main-card-right"></div>
+        <img id="main-pic" class="main-card-image" alt="profile-picture" src="https://1.gravatar.com/avatar/79f0095a7d876491aca0c12dcf3bbcca?s=200"/>
+        <div class="main-card-content-top">
+            <p class="p1">Dario Coletto</p>
+            <p class="p2">Android Developer</p>
+        </div>
+        <div class="main-card-content-bottom">
+            <p class="p3">Totally unable to provide visual-appealing stuff.</p>
+            <p class="p3">Randomly bought this domain so I need to put something here.</p>
+        </div>
+    </div>
+    <div id="card-column" class="card-column"></div>
+</body>
+</html>
