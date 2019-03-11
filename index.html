@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1976D2">
+    <meta name="Description" content="Personal website based on github repositories of dcoletto/coletz accounts">
     
     <title>coletz.dev</title>
 
@@ -32,10 +33,10 @@
 
                 const author = document.createElement("p");
                 const authorLink = document.createElement("a");
-                author.id = repo.owner.owner_id;
                 author.classList.add("secondary-card-author");
                 authorLink.href = repo.owner.html_url;
                 authorLink.target = "_blank";
+                authorLink.rel = "noopener noreferrer";
                 authorLink.innerText = "@" + repo.owner.login;
                 author.appendChild(authorLink);
                 secondaryCard.appendChild(author);
