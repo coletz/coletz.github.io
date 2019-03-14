@@ -18,9 +18,12 @@
     <script defer src="js/github-api.js"></script>
 
     <script defer>
+        let initialized = false;
         const github = new GithubApi();
 
         function onInit(){
+            if(initialized) return;
+            initialized = true;
             initCutter();
             const cardColumn = document.getElementById("card-column");
             console.log(cardColumn);
@@ -69,6 +72,11 @@
             };
             github.initGithub();
         }
+
+        // Calling the script twice (here and on the body load) since it is deferred
+        // and it's not called in the onload (probably?)
+        // Maybe some browser doesn't support deferred, so let's do this
+        onInit();
     </script>
 </head>
 <body onload="onInit()" onresize="resizeCutter()">
