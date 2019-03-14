@@ -9,19 +9,23 @@ let mainCard;
 let mainPic;
 let cutter;
 
+let cutterInitialized = false;
 
-function initCutter(){
-    if(document.readyState === "complete") {
-        mainCard = document.getElementById("main-card");
-        mainPic = document.getElementById("main-pic");
-        cutter = document.getElementById("main-card-cutter");
-        cutter.style.transformOrigin = "bottom right";
-        resizeCutter();
-    }
+function loadCutter(){
+    if(document.readyState !== "complete" || cutterInitialized) return;
+    cutterInitialized = true;
+
+    mainCard = document.getElementById("main-card");
+    mainPic = document.getElementById("main-pic");
+    cutter = document.getElementById("main-card-cutter");
+    cutter.style.transformOrigin = "bottom right";
+    cutter.style.transition = "transform 0.5s ease";
+
+    resizeCutter();
 }
 
 function resizeCutter(){
-    if(document.readyState === "complete") {
+    if(document.readyState === "complete" && cutterInitialized) {
         const b = mainPic.offsetLeft + mainPic.width / 2;
         const c = mainCard.clientHeight - (mainPic.offsetTop + mainPic.height / 2);
 
@@ -33,4 +37,4 @@ function resizeCutter(){
     }
 }
 
-initCutter();
+loadCutter();

@@ -8,16 +8,11 @@
     
     <title>coletz.dev</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
-    <!-- Load common before specific so override will work properly -->
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/main-card.css">
-    <link rel="stylesheet" type="text/css" href="css/secondary-card.css">
-
     <script defer src="js/cutter.js"></script>
     <script defer src="js/github-api.js"></script>
+    <script defer src="js/deferred-css-loader.js"></script>
 </head>
-<body onload="onInit()" onresize="resizeCutter()">
+<body onload="loadGithub();loadCutter();" onresize="resizeCutter();">
     <div id="main-card" class="base-card main-card">
         <div id="main-card-cutter"></div>
         <img id="main-pic" class="main-card-image" alt="profile-picture" src="https://1.gravatar.com/avatar/79f0095a7d876491aca0c12dcf3bbcca?s=200"/>

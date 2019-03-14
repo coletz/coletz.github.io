@@ -36,12 +36,12 @@ class Owner {
     }
 }
 
-let initialized = false;
+let githubApiInitialized = false;
 const github = new GithubApi();
 
-function onInit(){
-    if(initialized) return;
-    initialized = true;
+function loadGithub(){
+    if(document.readyState !== "complete" || githubApiInitialized) return;
+    githubApiInitialized = true;
 
     const cardColumn = document.getElementById("card-column");
 
@@ -93,4 +93,4 @@ function onInit(){
 // Calling the script twice (here and on the body load) since it is deferred
 // and it's not called in the onload (probably?)
 // Maybe some browser doesn't support deferred, so let's do this
-onInit();
+loadGithub();
