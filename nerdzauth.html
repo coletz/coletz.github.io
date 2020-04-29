@@ -1,14 +1,15 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-      function setCode() {
+      function setParams() {
         var url = new URL(window.location.href);
-        var code = url.searchParams.get("code");
-        document.getElementById("redirect").href = "nerdz://oauth/code?="+code
+        var params = url.searchParams.toString();
+        document.getElementById("redirect").href = "nerdz://oauth/code?"+params;
       }
     </script>
   </head>
-  <body onload="setCode();">
+  <body onload="setParams();">
     <a id="redirect">Back to Nerdz app</a>
   </body>
 </html>
