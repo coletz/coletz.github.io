@@ -1,1 +1,14 @@
-<a href="nerdz://oauth/code">Test</a>
+<html>
+  <head>
+    <script>
+      function setCode() {
+        var url = new URL(window.location.href);
+        var code = url.searchParams.get("code");
+        document.getElementById("redirect").href = "nerdz://oauth/code?="+code
+      }
+    </script>
+  </head>
+  <body onload="setCode();">
+    <a id="redirect">Back to Nerdz app</a>
+  </body>
+</html>
